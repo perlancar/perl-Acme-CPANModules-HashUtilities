@@ -1,7 +1,12 @@
 package Acme::CPANModules::HashUtilities;
 
+# AUTHORITY
 # DATE
+# DIST
 # VERSION
+
+use strict;
+use Acme::CPANModulesUtil::Misc;
 
 our $LIST = {
     summary => "Modules that manipulate hashes",
@@ -97,12 +102,7 @@ _
     'x.app.cpanmodules.show_entries' => 0,
 };
 
-$LIST->{entries} = [
-    map { +{module=>$_} }
-        do { my %seen; grep { !$seen{$_}++ }
-             ($LIST->{description} =~ /<pm:(\w+(?:::\w+)*)>/g)
-         }
-];
+Acme::CPANModulesUtil::Misc::populate_entries_from_module_links_in_description;
 
 1;
 # ABSTRACT:
